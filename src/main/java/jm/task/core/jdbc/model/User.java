@@ -1,10 +1,17 @@
 package jm.task.core.jdbc.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @Table
+//@Data // Попробовал через Lombok
+//@NoArgsConstructor // Попробовал через Lombok
+
 public class User {
     @Id
     private Long id;
@@ -38,7 +45,23 @@ public class User {
         this.age = age;
     }
 
-    public Long getId() {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(id, user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(age, user.age);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, age);
+    }
+
+        public Long getId() {
         return id;
     }
 
