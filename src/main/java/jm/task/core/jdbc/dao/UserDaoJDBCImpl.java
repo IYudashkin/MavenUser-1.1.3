@@ -23,15 +23,18 @@ public class UserDaoJDBCImpl implements UserDao {
                     "age tinyint, " +
                     "PRIMARY KEY (id))");
             System.out.println("Таблица создана");
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+
     public void dropUsersTable() {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("Drop table if exists taskjdbc.users");
             System.out.println("Таблица удалена");
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,6 +48,7 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setByte(3, age);
             preparedStatement.executeUpdate();
             System.out.println("User с именем - " + name + " добавлен в базу данных");
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -55,6 +59,7 @@ public class UserDaoJDBCImpl implements UserDao {
             String sql = "DELETE FROM taskjdbc.users where id";
             statement.executeUpdate(sql);
             System.out.println("User удален");
+            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -75,6 +80,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 user.setLastName(rs.getString("lastName"));
                 user.setAge(rs.getByte("age"));
                 allUsers.add(user);
+                connection.commit();
             }
 
         } catch (Exception e) {
@@ -91,6 +97,7 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(sql);
             System.out.println("Таблица очищена");
+//            connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Не удалось очистить");
