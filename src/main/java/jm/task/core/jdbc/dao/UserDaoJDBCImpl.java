@@ -24,8 +24,15 @@ public class UserDaoJDBCImpl implements UserDao {
                     "PRIMARY KEY (id))");
             System.out.println("Таблица создана");
             connection.commit();
+            connection.rollback();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                connection.rollback();
+                System.err.print("Transaction is being rolled back");
+            } catch (SQLException except) {
+                except.printStackTrace();
+            }
         }
     }
 
@@ -37,6 +44,12 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                connection.rollback();
+                System.err.print("Transaction is being rolled back");
+            } catch (SQLException except) {
+                except.printStackTrace();
+            }
         }
     }
 
@@ -51,6 +64,12 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                connection.rollback();
+                System.err.print("Transaction is being rolled back");
+            } catch (SQLException except) {
+                except.printStackTrace();
+            }
         }
     }
 
@@ -62,6 +81,12 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLException e) {
             e.printStackTrace();
+            try {
+                connection.rollback();
+                System.err.print("Transaction is being rolled back");
+            } catch (SQLException except) {
+                except.printStackTrace();
+            }
         }
     }
 
@@ -85,6 +110,12 @@ public class UserDaoJDBCImpl implements UserDao {
 
         } catch (Exception e) {
             e.printStackTrace();
+            try {
+                connection.rollback();
+                System.err.print("Transaction is being rolled back");
+            } catch (SQLException except) {
+                except.printStackTrace();
+            }
         }
         return allUsers;
     }
